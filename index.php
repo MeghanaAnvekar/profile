@@ -1,14 +1,10 @@
 <html>
-<head>
-<link rel="stylesheet" href="theme.css">
-</head>
 <body>
-<h1><u>Meghana Anvekar</u><h1>
-<b><hr></b>
+<h1>My Profile</h1>
 <?php
 include("connect.php");
 
-$sql = "SELECT * FROM personal WHERE year='2015' ";
+$sql = "SELECT * FROM personal WHERE id=1 ";
 
 $result =@mysqli_query($conn,$sql);
 
@@ -17,9 +13,12 @@ echo " coudnt recieve data ";
 else
 {
 $result =  mysqli_fetch_assoc($result);
-echo "<h2>Personal Details :</h2>";
+echo "<h2>Personal Details :<form action=\"pd.php\"> <input type=\"submit\" value=\"Edit\"/></form></h2>";
+echo "<p>Name :".$result['name']."<p>";
 echo "<p>DOB :".$result['dob']."</p>
+<p>Age :".$result['age']."</p>
 <p>Year of Joining :".$result['year']."</p>";
+
 
 }
 
@@ -31,13 +30,16 @@ echo " coudnt recieve data ";
 else
 {
 $row = mysqli_fetch_assoc($result);
-echo "<h2>Qualifications :</h2>
+echo "<h2>Qualifications :<form action=\"q.php\"> <input type=\"submit\" value=\"Edit\"/></form></h2>
 <table align=\"left\">";
 
 echo "<tr><td>".$row['contents']."</td></tr>";
 
 echo "</table>";
+
+
 }
+
 
 $sql = "SELECT * FROM interests";
 $result =@mysqli_query($conn,$sql);
@@ -47,14 +49,17 @@ echo " coudnt recieve data ";
 else
 {
 
-echo "<br><h2>Interests :</h2>
+echo "<br><h2>Interests : <form action=\"interests.php\"> <input type=\"submit\" value=\"Edit\"/></form></h2>
 <table align=\"left\">";
 while($row = mysqli_fetch_array($result))
 {
 echo "<tr><td>".$row['hobbies']."</td></tr>";
 }
 echo "</table>";
+
+
 }
+
 
 $sql = "SELECT * FROM achievements";
 $result =@mysqli_query($conn,$sql);
@@ -64,10 +69,11 @@ echo " coudnt recieve data ";
 else
 {
 
-echo "<br><br><br><br><br><br><p><h2>Achievements :</h2></p>";
+echo "<br><br><br><br><br><br><p><h2>Achievements :<form action=\"achieve.php\"> <input type=\"submit\" value=\"Edit\"/></form></h2></p>";
 $row = mysqli_fetch_assoc($result);
 
 echo "<p>".$row['contents']."</p>";
+
 
 }
 
@@ -79,14 +85,12 @@ echo " coudnt recieve data ";
 else
 {
 $result = mysqli_fetch_assoc($result);
-echo "<h2>Contact me :</h2>
+echo "<h2>Contact me :<form action=\"contact.php\"> <input type=\"submit\" value=\"Edit\"/></form></h2>
 <p>Phone :".$result['contact']."</p>
-<p>Email :".$result['address']."</p></body>
-</html>";
+<p>Address :".$result['address']."</p>";
 }
+
 mysqli_close($conn);
-
 ?>
-
-
-
+</body>
+</html>
